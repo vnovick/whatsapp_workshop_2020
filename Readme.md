@@ -188,4 +188,52 @@ Style screens to look like this:
 
 </details>
 
-After this exercise we will have basic layout of all components
+After this exercise we will have basic layout of all components. If by the end of the exercise you have not completed everything, you can check out `step2` branch for solution.
+
+<details>
+<summary>
+Exercise 3
+</summary>
+Add more styling to the app to look like this: 
+
+
+
+- Add `ImageBackground` component to `ChatView` screen. Get image from the internet and load it locally by using `require` syntax.
+- Create `Avatar` component and add it to `ChatItem` component. 
+- Use `FlatList` for rendering both list of conversations and messages
+- Add `chevron-right` icon from `react-native-vector-icons/MaterialIcons` 
+
+<details> 
+    <summary>
+    Troubleshooting
+    </summary>
+Make sure to add to `Info.plist` the following:
+
+```
+<key>UIAppFonts</key>
+	<array>
+		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
+		<string>EvilIcons.ttf</string>
+		<string>Feather.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>Ionicons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>Octicons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Zocial.ttf</string>
+	</array>
+```
+
+and for android to `app/build.gradle` the following:
+
+`apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"`
+
+</details>
+
+</details>
