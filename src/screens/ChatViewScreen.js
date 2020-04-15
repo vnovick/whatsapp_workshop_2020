@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {ImageBackground, StyleSheet, FlatList} from 'react-native';
 import Message from '../components/Message';
 import ApplicationStyles from '../styles/appstyles';
 
@@ -18,11 +18,16 @@ const messages = [
 
 export default () => {
   return (
-    <View style={styles.container}>
-      {messages.map(message => (
-        <Message key={message.id} {...message} />
-      ))}
-    </View>
+    <ImageBackground
+      source={require('../assets/imgs/background.png')}
+      style={styles.container}>
+      <FlatList
+        style={styles.container}
+        data={messages}
+        renderItem={({item}) => <Message key={item.id} {...item} />}
+        keyExtractor={(item, index) => `message-${index}`}
+      />
+    </ImageBackground>
   );
 };
 

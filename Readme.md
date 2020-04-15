@@ -107,7 +107,7 @@ Add `sdk.dir=/Users/username/Library/Android/sdk` under it making sure you subst
 Slides for the whole workshop can be found [here](), but please make sure to follow along instead of jumping forward. If you've completed the step and wanna get bonus exercises, just ask.
 
 <details>
-    <summary>Exercise 1</summary>
+    <summary>Exercise 1 - Components structure</summary>
 
   - Install [flipper](https://github.com/facebook/flipper) for debugging
   - run `npm install` in the repo after cloning it
@@ -173,7 +173,7 @@ After this exercise you will have component structure that we can use for future
 
 <details>
 <summary>
-Excercise 2
+Excercise 2 - Layout and Flexbox
 </summary>
 
 Style screens to look like this:
@@ -192,7 +192,7 @@ After this exercise we will have basic layout of all components. If by the end o
 
 <details>
 <summary>
-Exercise 3
+Exercise 3 - Images and Icons
 </summary>
 Add more styling to the app to look like this: 
 
@@ -203,9 +203,15 @@ Add more styling to the app to look like this:
 - Use `FlatList` for rendering both list of conversations and messages
 - Add `chevron-right` icon from `react-native-vector-icons/MaterialIcons` 
 
+> Make sure to install `react-native-vector-icons`
+
+Vector Icons: https://github.com/oblador/react-native-vector-icons
+
+after you install make sure on `iOS` to run `npx pod-install ios`
+
 <details> 
     <summary>
-    Troubleshooting
+    Installation instructions
     </summary>
 Make sure to add to `Info.plist` the following:
 
@@ -236,4 +242,123 @@ and for android to `app/build.gradle` the following:
 
 </details>
 
+If there are no network images on Android it means your emulator has no access to internet. Run emulator with:
+
+```
+emulator Pixel_3_API_28 -dns-server 8.8.8.8
+```
 </details>
+
+After this exercise screens should look like this:
+
+If you are not able to complete this section on time, checkout `step3` branch, run `npm install`, run `npx pod-install ios`. Make sure to restart metro bundler and rebuild the app
+<details>
+<summary>Exercise 4 - Input and Keyboard</summary>
+
+- create `services/api.js` file where you will have mocked api calls.
+
+```javascript
+export const mockMessages = [
+  {
+    userId: 1,
+    message: 'Hi Vladimir',
+  },
+  {
+    userId: 2,
+    message: 'Hi, John',
+  },
+  {
+    userId: 1,
+    message: 'When we will learn real data fetching?',
+  },
+  {
+    userId: 2,
+    message:
+      "Let's get the basic first. We need to understand styling and handling inputs right? After all you want not only to receive but send messages too right?",
+  },
+];
+
+export const chats = [
+  {
+    id: '123',
+    title: 'Sophia Willis',
+    description: 'Hey there',
+    user: {
+        avatarUrl: 'https://randomuser.me/api/portraits/women/43.jpg',
+    }
+    date: '8:30am',
+  },
+  {
+    id: '234',
+    title: 'Ken Wheeler',
+    description: "What's up, Dude?",
+    user: {
+        avatarUrl: 'https://avatars2.githubusercontent.com/u/286616?s=460&v=4',
+    }
+    date: 'Yesterday',
+  },
+  {
+    id: '123',
+    title: 'John Doe',
+    description: 'Hey there',
+    user: {
+        avatarUrl: 'https://randomuser.me/api/portraits/men/38.jpg',
+    },
+    date: 'Yesterday',
+  },
+  {
+    id: '123',
+    title: 'John',
+    description: 'Hey there',
+    user: {
+        avatarUrl: 'https://randomuser.me/api/portraits/men/39.jpg',
+    }
+    date: 'Yesterday',
+  },
+  {
+    id: '123',
+    title: 'Zoey Barnes',
+    description: "How's going?",
+    user: {
+        avatarUrl: 'https://randomuser.me/api/portraits/women/48.jpg',
+    }
+    date: '15/04/2018',
+  }
+];
+
+export const getChats = () =>
+  new Promise(resolve => setTimeout(() => resolve(chats), 1000));
+
+export const getMessagesById = id =>
+  new Promise(resolve => setTimeout(() => resolve(mockMessages), 1000));
+
+
+export const postMessage = (message) => mockMessages.push({
+  userId: 1,
+  message
+});
+
+```
+- Use these calls to load chats and messages
+- Write Compose component to post new messages using `postMessage` method from `services/api`. For input use [`TextInput` component](https://reactnative.dev/docs/textinput.html)
+- When Keyboard is opened, use [`KeyboardAvoidingView`](https://reactnative.dev/docs/keyboardavoidingview.html) to make sure it's not covering the `TextInput` 
+- Dismiss Keyboard and empty the field when posting a new message
+
+</details>
+
+In the end we should have basic functionality of posting and viewing messages. Now it's time to remove screen navigating components and create proper navigation layout. If you are not able to complete this step on time, make sure before next step to check out `step4` branch, run `npm install` and `npx pod-install ios` if you are using iOS.
+Make sure to restart metro bundler and rebuild the app
+
+<details>
+<summary>
+Exercise 5 - Navigation
+</summary>
+
+- Remove Navigation buttons from the bottom of the screen
+- Create Navigation from `ConversationScreen` to `ChatViewScreen` passing title of the conversation as a param. 
+- Display conversation title in the header on `ChatViewScreen` and load relevant messages for conversation based on id (it will matter for later stage exercises. Right now messages will be the same)
+- Add right button on the left on `ConversationScreen` with a gear icon and clicking on it will alert("Opened settings")
+
+</details>
+
+After this exercise 
