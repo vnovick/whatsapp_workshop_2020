@@ -354,11 +354,94 @@ Make sure to restart metro bundler and rebuild the app
 Exercise 5 - Navigation
 </summary>
 
+Install React-navigation by following https://reactnavigation.org/docs/getting-started
+
+In a nutshell it's the following steps:
+`npm install --save @react-navigation/native`
+`npm install --save react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view`
+
+
+
 - Remove Navigation buttons from the bottom of the screen
 - Create Navigation from `ConversationScreen` to `ChatViewScreen` passing title of the conversation as a param. 
 - Display conversation title in the header on `ChatViewScreen` and load relevant messages for conversation based on id (it will matter for later stage exercises. Right now messages will be the same)
-- Add right button on the left on `ConversationScreen` with a gear icon and clicking on it will alert("Opened settings")
+- Add left button on the left on `ChatViewScreen` with chevron left and `goBack` navigation
 
 </details>
 
-After this exercise 
+After this exercise You will have basic navigation workflow and we can start with Animations. If you are not able to finish this exercise on time, you can checkout `step5` branch, `npm install` `npx pod-install ios`
+
+<details>
+<summary>
+Exercise 6 - Animations
+</summary>
+
+Take a look at the following video and implement 
+Animations using `Animated` API and `react-native-animatable`
+
+https://www.youtube.com/watch?v=OmZfMNsvBQA
+
+</details>
+
+After this exercise you suppose to have you screen with animations as shown in the video. If you are not able to complete this exercise on time, then you can check out `step 6` branch in the repo, follow with `npm install`, `npx pod-install ios` and rebuild your project and restart. Make sure to stop the metro bundler beforehand.
+
+<details>
+<summary>
+Exercise 7 - GraphQL
+</summary>
+
+Install Apollo GraphQL client by following this document:
+https://www.apollographql.com/docs/react/get-started/
+
+Configure your client for real-time capabilities like so:
+
+```javascript
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { split } from 'apollo-link';
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
+
+// Create an http link:
+const httpLink = new HttpLink({
+  uri: 'endpoint url'
+});
+
+// Create a WebSocket link:
+const wsLink = new WebSocketLink({
+  uri: `ws://endpoint url`,
+  options: {
+    reconnect: true
+  }
+});
+
+// using the ability to split links, you can send data to each link
+// depending on what kind of operation is being sent
+const link = split(
+  // split based on operation type
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httpLink,
+);
+
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+  // Provide required constructor fields
+  cache: cache,
+  link: link,
+});
+```
+
+- Now instead of having API calls, use `useQuery` hook to get conversations from the endpoint created during the workshop. 
+
+- Use `useMutation` to post message to this endpoint. Finally use `useSubscription` to get real-time data.
+- Get rid of `api/services`
+
+</details>

@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Avatar from './Avatar';
 
-export default ({title, description, user}) => {
+export default ({title, description, user, navigate, userId}) => {
   return (
-    <View style={styles.chatItem}>
+    <TouchableOpacity
+      onPress={() => navigate('ChatViewScreen', {userId, title })}
+      style={styles.chatItem}>
       <Avatar src={user.avatarUrl} />
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
@@ -15,7 +17,7 @@ export default ({title, description, user}) => {
         <Text style={styles.label}>Yesterday</Text>
         <Icon style={styles.arrow} name="chevron-right" size={20} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
 import Message from '../components/Message';
 import Compose from '../components/Compose';
@@ -22,7 +23,7 @@ export default () => {
     fetchMessages();
   }, [messages]);
 
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0;
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 0;
 
   return (
     <ImageBackground

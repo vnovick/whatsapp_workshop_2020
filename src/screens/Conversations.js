@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, View, StyleSheet} from 'react-native';
+import {SafeAreaView, FlatList, View, StyleSheet} from 'react-native';
 import ChatItem from '../components/ChatItem';
 import ApplicationStyles from '../styles/appstyles';
 import {getChats} from '../services/api';
 
-export default () => {
+export default ({navigation}) => {
   const [chats, setChats] = useState([]);
 
   const fetchChats = async () => {
@@ -15,14 +15,16 @@ export default () => {
     fetchChats();
   }, [chats]);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={chats}
-        renderItem={({item}) => <ChatItem {...item} />}
+        renderItem={({item}) => (
+          <ChatItem {...item} navigate={navigation.navigate} />
+        )}
         keyExtractor={item => `message-${item.id}`}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
