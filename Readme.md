@@ -178,8 +178,11 @@ Excercise 2 - Layout and Flexbox
 
 Style screens to look like this:
 
-![ChatViewScreen](https://s3-us-west-2.amazonaws.com/vladjs-presentations/ChatsScreen.png)
-![ConversationsScreen](https://s3-us-west-2.amazonaws.com/vladjs-presentations/ChatView.png)
+![ConversationsScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC2.png)
+![ConversationsScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC22.png)
+
+![ChatViewScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC21.png)
+![ChatViewScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC23.png)
 
 
 ## Resources
@@ -196,6 +199,12 @@ Exercise 3 - Images and Icons
 </summary>
 Add more styling to the app to look like this: 
 
+
+![ConversationsScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC3.png)
+![ConversationsScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC32.png)
+
+![ChatViewScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC31.png)
+![ChatViewScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC33.png)
 
 
 - Add `ImageBackground` component to `ChatView` screen. Get image from the internet and load it locally by using `require` syntax.
@@ -250,6 +259,14 @@ emulator Pixel_3_API_28 -dns-server 8.8.8.8
 </details>
 
 After this exercise screens should look like this:
+
+
+![ConversationsScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC4.png)
+![ConversationsScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC42.png)
+
+![ChatViewScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC41.png)
+![ChatViewScreen](https://vladjs-presentations.s3-us-west-2.amazonaws.com/EXC43.png)
+
 
 If you are not able to complete this section on time, checkout `step3` branch, run `npm install`, run `npx pod-install ios`. Make sure to restart metro bundler and rebuild the app
 <details>
