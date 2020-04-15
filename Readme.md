@@ -253,7 +253,7 @@ After this exercise screens should look like this:
 
 If you are not able to complete this section on time, checkout `step3` branch, run `npm install`, run `npx pod-install ios`. Make sure to restart metro bundler and rebuild the app
 <details>
-<summary>Exercise 4 - Input and Keyboard</summary>
+<summary>Exercise 4 - API, Input and Keyboard</summary>
 
 - create `services/api.js` file where you will have mocked api calls.
 
@@ -284,8 +284,8 @@ export const chats = [
     title: 'Sophia Willis',
     description: 'Hey there',
     user: {
-        avatarUrl: 'https://randomuser.me/api/portraits/women/43.jpg',
-    }
+      avatarUrl: 'https://randomuser.me/api/portraits/women/43.jpg',
+    },
     date: '8:30am',
   },
   {
@@ -293,8 +293,8 @@ export const chats = [
     title: 'Ken Wheeler',
     description: "What's up, Dude?",
     user: {
-        avatarUrl: 'https://avatars2.githubusercontent.com/u/286616?s=460&v=4',
-    }
+      avatarUrl: 'https://avatars2.githubusercontent.com/u/286616?s=460&v=4',
+    },
     date: 'Yesterday',
   },
   {
@@ -302,7 +302,7 @@ export const chats = [
     title: 'John Doe',
     description: 'Hey there',
     user: {
-        avatarUrl: 'https://randomuser.me/api/portraits/men/38.jpg',
+      avatarUrl: 'https://randomuser.me/api/portraits/men/38.jpg',
     },
     date: 'Yesterday',
   },
@@ -311,8 +311,8 @@ export const chats = [
     title: 'John',
     description: 'Hey there',
     user: {
-        avatarUrl: 'https://randomuser.me/api/portraits/men/39.jpg',
-    }
+      avatarUrl: 'https://randomuser.me/api/portraits/men/39.jpg',
+    },
     date: 'Yesterday',
   },
   {
@@ -320,10 +320,10 @@ export const chats = [
     title: 'Zoey Barnes',
     description: "How's going?",
     user: {
-        avatarUrl: 'https://randomuser.me/api/portraits/women/48.jpg',
-    }
+      avatarUrl: 'https://randomuser.me/api/portraits/women/48.jpg',
+    },
     date: '15/04/2018',
-  }
+  },
 ];
 
 export const getChats = () =>
@@ -332,11 +332,11 @@ export const getChats = () =>
 export const getMessagesById = id =>
   new Promise(resolve => setTimeout(() => resolve(mockMessages), 1000));
 
-
-export const postMessage = (message) => mockMessages.push({
-  userId: 1,
-  message
-});
+export const postMessage = message =>
+  mockMessages.push({
+    userId: 1,
+    message,
+  });
 
 ```
 - Use these calls to load chats and messages
