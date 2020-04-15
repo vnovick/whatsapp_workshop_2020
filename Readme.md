@@ -71,8 +71,43 @@ Each of the directions above, ask you to generate "AwesomeProject" and run it.  
 
 In this remote workshop setting, we will be using Zoom breakout rooms feauture. 
 
+### Starting your app
+
+After cloning this repo, please run `npm install` to install all dependencies.
+
+To run `iOS` app within simulator, use 
+`npx react-native run-ios`
+
+For Android, use 
+`npx react-native run-android`
+
+> To follow along with the workshop properly, there is an assumption that you've done prerequisite installations at home and have Hello World app running with react-native cli. 
+
+> I will answer questions for troubleshooting during the workshop, but to ensure consistent pace of the workshop, if you haven't done required installations beforehand, please refrain from asking installation questions.
+
 <details>
-    <summary>Excercise 1</summary>
+<summary>Troubleshooting</summary>
+
+If for some reason Android Build has failed, make sure you followed all steps at [https://reactnative.dev/docs/environment-setup](https://reactnative.dev/docs/environment-setup) 
+
+Potential fixes:
+- Check that you don't have two JDKs in the system
+- Check that you have `ANDROID_HOME` defined and in the Path
+
+Potential fix for `SDK not found` (temp fix and a bad practice):
+
+- Add `local.properties` file in `android` directory
+
+Add `sdk.dir=/Users/username/Library/Android/sdk` under it making sure you substitute username with your username.
+
+
+</details>
+
+
+Slides for the whole workshop can be found [here](), but please make sure to follow along instead of jumping forward. If you've completed the step and wanna get bonus exercises, just ask.
+
+<details>
+    <summary>Exercise 1</summary>
 
   - Install [flipper](https://github.com/facebook/flipper) for debugging
   - run `npm install` in the repo after cloning it
@@ -133,3 +168,4 @@ For this exercise it should just return empty `View`
 </details>
 
 After this exercise you will have component structure that we can use for future examples. If by the end of the exercise you have not completed everything, you can check out `step1` branch for solution.
+
