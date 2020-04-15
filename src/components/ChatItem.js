@@ -3,7 +3,7 @@ import {View, Animated, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Avatar from './Avatar';
 
-export default ({title, description, user, navigate, userId}) => {
+export default ({title, content, user, navigate, userId}) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.timing(animatedValue, {
@@ -31,7 +31,7 @@ export default ({title, description, user, navigate, userId}) => {
         <Avatar src={user.avatarUrl} />
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.label}>{description}</Text>
+          <Text style={styles.label}>{content}</Text>
         </View>
         <View style={styles.navLabel}>
           <Text style={styles.label}>Yesterday</Text>
