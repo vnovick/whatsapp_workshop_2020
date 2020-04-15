@@ -114,8 +114,25 @@ Slides for the whole workshop can be found [here](), but please make sure to fol
 
 - create `src` folder
 
+- create `src/components/Compose.js` component
+
+For this exercise it should return `View` 
+
+- create `src/components/Message.js` component
+
+It should get message prop and render it
+
+- create `src/components/ChatItem.js` component
+
+It should get `title` and `description` prop and render them.
+
+- create `src/components/Avatar.js` component 
+
+For this exercise it should just return empty `View` 
+
 - create `src/screens/Conversations.js` component
-That will contain a `View` with `Text` component that in future we will turn into chat coversations list. 
+- 
+That will contain `ChatItem` component that in future we will turn into chat coversations list. 
 
 Data shape will look like this. In next excercises we will get it from api.
 
@@ -132,12 +149,12 @@ const chats = [{
 
 - create `src/screens/ChatViewScreen.js` component
 
-This component should have multiple `Text` components to render messages. Use the following mocked data:
+This component should have multiple `Message` components to render messages. Use the following mocked data:
 
 ```javascript
 const messages = [{
     id: 1,
-    userId: 1
+    userId: 1,
     message: 'Lorem Ipsum'
 },{
     id: 2,
@@ -146,26 +163,30 @@ const messages = [{
 }]
 ```
 
-- create `src/components/Compose.js` component
-
-For this exercise it should return `View` and `Text`
-
-- create `src/components/Message.js` component
-
-Use this component to render chat message in `ChatViewScreen`
-
-- create `src/components/ChatItem.js` component
-
-Use this component to render conversation item on `Conversations` screen.
-
-- create `src/components/Avatar.js` component 
-
-For this exercise it should just return empty `View` 
-
 - Switch different screens in `App.js` by changing state (use `useState` hook for that)
+- Add a `Button` to `App.js` and switch it's title conditionaly
 
 
 </details>
 
 After this exercise you will have component structure that we can use for future examples. If by the end of the exercise you have not completed everything, you can check out `step1` branch for solution.
+
+<details>
+<summary>
+Excercise 2
+</summary>
+
+Style screens to look like this:
+
+![ChatViewScreen](https://s3-us-west-2.amazonaws.com/vladjs-presentations/ChatsScreen.png)
+![ConversationsScreen](https://s3-us-west-2.amazonaws.com/vladjs-presentations/ChatView.png)
+
+
+## Resources
+- Layout style props https://facebook.github.io/react-native/docs/layout-props.html
+- Test style props https://facebook.github.io/react-native/docs/text.html
+
+</details>
+
+After this exercise we will have basic layout of all components
 
