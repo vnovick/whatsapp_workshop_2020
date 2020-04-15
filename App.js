@@ -7,7 +7,13 @@
  */
 
 import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Button, StatusBar} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Button,
+  StatusBar,
+  Platform,
+} from 'react-native';
 
 import ConvesationsScreen from './src/screens/Conversations';
 import ChatViewScreen from './src/screens/ChatViewScreen';
@@ -20,8 +26,10 @@ const App: () => React$Node = () => {
   }
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
+      <StatusBar
+        barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'}
+      />
+      <SafeAreaView style={styles.container}>
         {renderScreen()}
         <Button
           title={
@@ -41,6 +49,8 @@ const App: () => React$Node = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

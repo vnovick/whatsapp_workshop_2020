@@ -1,6 +1,8 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import ChatItem from '../components/ChatItem';
+import ApplicationStyles from '../styles/appstyles';
+
 const chats = [
   {
     id: 1,
@@ -14,10 +16,14 @@ const chats = [
 
 export default () => {
   return (
-    <View>
+    <View style={styles.container}>
       {chats.map(chat => (
         <ChatItem key={chat.id} {...chat} />
       ))}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  ...ApplicationStyles,
+});

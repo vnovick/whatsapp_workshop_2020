@@ -1,6 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Message from '../components/Message';
+import ApplicationStyles from '../styles/appstyles';
 
 const messages = [
   {
@@ -17,10 +18,14 @@ const messages = [
 
 export default () => {
   return (
-    <View>
+    <View style={styles.container}>
       {messages.map(message => (
         <Message key={message.id} {...message} />
       ))}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  ...ApplicationStyles,
+});
