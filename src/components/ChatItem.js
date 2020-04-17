@@ -1,9 +1,9 @@
-import React, {useEffect, useRef} from 'react';
-import {View, Animated, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Animated, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Avatar from './Avatar';
 
-export default ({title, content, user, navigate, userId}) => {
+export default ({ title, user, id: conversationId, content, navigate }) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.timing(animatedValue, {
@@ -26,7 +26,7 @@ export default ({title, content, user, navigate, userId}) => {
         ],
       }}>
       <TouchableOpacity
-        onPress={() => navigate('ChatViewScreen', {userId, title})}
+        onPress={() => navigate('ChatViewScreen', { userId: user.id, title, conversationId })}
         style={styles.chatItem}>
         <Avatar src={user.avatarUrl} />
         <View style={styles.content}>

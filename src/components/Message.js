@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-export default ({message, userId}) => {
+export default ({ message, userId }) => {
   const incoming = userId !== 1;
   return (
     <Animatable.View

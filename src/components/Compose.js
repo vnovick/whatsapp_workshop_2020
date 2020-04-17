@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Keyboard, Button, TextInput} from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Keyboard, Button, TextInput } from 'react-native';
 
-export const Compose = ({submit}) => {
+export const Compose = ({ submit, userId, conversationId }) => {
   const [text, setText] = useState('');
   const submitMessage = () => {
     setText('');
-    submit(text);
+    submit(text, userId, conversationId);
     Keyboard.dismiss();
   };
   return (

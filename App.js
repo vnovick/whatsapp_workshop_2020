@@ -8,20 +8,20 @@
 
 import React from 'react';
 import 'react-native-gesture-handler';
-import {SafeAreaView, StyleSheet, StatusBar, Platform} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { SafeAreaView, StyleSheet, StatusBar, Platform } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import ConvesationsScreen from './src/screens/Conversations';
 import ChatViewScreen from './src/screens/ChatViewScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {ApolloClient} from 'apollo-client';
-import {InMemoryCache} from 'apollo-cache-inmemory';
-import {HttpLink} from 'apollo-link-http';
-import {split} from 'apollo-link';
-import {WebSocketLink} from 'apollo-link-ws';
-import {getMainDefinition} from 'apollo-utilities';
-import {ApolloProvider} from '@apollo/react-hooks';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { split } from 'apollo-link';
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
+import { ApolloProvider } from '@apollo/react-hooks';
 // Create an http link:
 const httpLink = new HttpLink({
   uri: 'https://whatsapp-workshop-2020.herokuapp.com/v1/graphql',
@@ -39,7 +39,7 @@ const wsLink = new WebSocketLink({
 // depending on what kind of operation is being sent
 const link = split(
   // split based on operation type
-  ({query}) => {
+  ({ query }) => {
     const definition = getMainDefinition(query);
     return (
       definition.kind === 'OperationDefinition' &&
@@ -81,7 +81,7 @@ const App: () => React$Node = () => {
             <Stack.Screen
               name="ChatViewScreen"
               component={ChatViewScreen}
-              options={({route, navigation}) => ({
+              options={({ route, navigation }) => ({
                 title: route.params?.title,
                 headerLeft: () => (
                   <Icon

@@ -1,27 +1,29 @@
-import React, {useState, useEffect} from 'react';
-import {SafeAreaView, Text, FlatList, View, StyleSheet} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, Text, FlatList, View, StyleSheet } from 'react-native';
 import ChatItem from '../components/ChatItem';
 import ApplicationStyles from '../styles/appstyles';
-import {getChats} from '../services/api';
-import {useSubscription} from '@apollo/react-hooks';
-import {gql} from 'apollo-boost';
+import { getChats } from '../services/api';
+import { useSubscription } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
 const GET_CONVERSATIONS = gql`
   subscription {
     conversations {
+      id
       title
       content
       user {
         avatarUrl
+        id
       }
     }
   }
 `;
 
-export default ({navigation}) => {
+export default ({ navigation }) => {
   const [chats, setChats] = useState([]);
 
-  const {loading, data, error} = useSubscription(GET_CONVERSATIONS);
+  const { loading, data, error } = useSubscription(GET_CONVERSATIONS);
 
   if (loading) {
     return (
@@ -41,7 +43,7 @@ export default ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={data.conversations}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <ChatItem {...item} navigate={navigation.navigate} />
         )}
         keyExtractor={item => `message-${item.id}`}
