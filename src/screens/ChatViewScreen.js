@@ -1,7 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {Message, Compose} from '../components';
-
+import ApplicationStyles from '../styles/appstyles';
 const messages = [
   {
     id: 1,
@@ -16,10 +16,14 @@ const messages = [
 ];
 
 export const ChatViewScreen = () => (
-  <View>
+  <View style={styles.container}>
     {messages.map((message) => (
       <Message key={message.id} {...message} />
     ))}
     <Compose />
   </View>
 );
+
+const styles = StyleSheet.create({
+  ...ApplicationStyles,
+});
