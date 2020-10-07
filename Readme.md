@@ -103,7 +103,7 @@ Add `sdk.dir=/Users/username/Library/Android/sdk` under it making sure you subst
 
 </details>
 
-Slides for the whole workshop can be found [here](), but please make sure to follow along instead of jumping forward. If you've completed the step and wanna get bonus exercises, just ask.
+Slides for the whole workshop can be found [here](https://slides.com/vladimirnovick/build-whatsapp-in-a-day-rn), but please make sure to follow along instead of jumping forward. If you've completed the step and wanna get bonus exercises, just ask.
 
 <details>
     <summary>Exercise 1 - Components structure</summary>
