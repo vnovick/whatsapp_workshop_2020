@@ -1,11 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
-export const Message = ({message, userId}) => (
-  <View style={[styles.message, userId !== 1 ? styles.incomingMessage : null]}>
-    <Text>{message}</Text>
-  </View>
-);
+export const Message = ({message, userId}) => {
+  const incoming = userId !== 1;
+  return (
+    <Animatable.View
+      duration={200}
+      animation={incoming ? 'slideInLeft' : 'slideInRight'}
+      style={[styles.message, incoming ? styles.incomingMessage : null]}>
+      <Text>{message}</Text>
+    </Animatable.View>
+  );
+};
 
 const styles = StyleSheet.create({
   message: {

@@ -400,6 +400,10 @@ Animations using `Animated` API and `react-native-animatable`
 
 https://www.youtube.com/watch?v=OmZfMNsvBQA
 
+For Messages, use `react-native-animatable` and for Chat Items use `Animated` API.
+
+Bonus: On `ConversationScreen`, make messages appear one after another with `100ms` delay. Hint: You can use `Animated.delay` and `Animated.sequence` for that
+
 </details>
 
 After this exercise you suppose to have you screen with animations as shown in the video. If you are not able to complete this exercise on time, then you can check out `step 6` branch in the repo, follow with `npm install`, `npx pod-install ios` and rebuild your project and restart. Make sure to stop the metro bundler beforehand.

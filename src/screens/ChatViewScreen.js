@@ -35,7 +35,9 @@ export const ChatViewScreen = ({route}) => {
             <FlatList
               style={styles.container}
               data={messages}
-              renderItem={({item}) => <Message key={item.id} {...item} />}
+              renderItem={({item, index}) => (
+                <Message key={item.id} {...item} />
+              )}
               keyExtractor={(item, index) => `message-${index}`}
             />
             <Compose submit={postMessage} />

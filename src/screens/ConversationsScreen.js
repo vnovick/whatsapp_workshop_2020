@@ -19,8 +19,8 @@ export const ConversationsScreen = ({navigation}) => {
     <View style={styles.container}>
       <FlatList
         data={chats}
-        renderItem={({item}) => (
-          <ChatItem {...item} navigate={navigation.navigate} />
+        renderItem={({item, index}) => (
+          <ChatItem {...item} navigate={navigation.navigate} index={index} />
         )}
         keyExtractor={(item) => `message-${item.id}`}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
