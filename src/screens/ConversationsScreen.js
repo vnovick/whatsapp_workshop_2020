@@ -1,24 +1,42 @@
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {ChatItem} from '../components';
 import ApplicationStyles from '../styles/appstyles';
-import {getChats} from '../services/api';
+import {useSubscription, gql} from '@apollo/client';
+const GET_CONVERSATIONS = gql`
+  subscription {
+    conversations {
+      id
+      title
+      content
+      user {
+        avatarUrl
+      }
+    }
+  }
+`;
 
 export const ConversationsScreen = ({navigation}) => {
-  const [chats, setChats] = useState([]);
-  const fetchChats = async () => {
-    const result = await getChats();
-    setChats(result);
-  };
+  const {loading, data, error} = useSubscription(GET_CONVERSATIONS);
 
-  useEffect(() => {
-    fetchChats();
-  }, [chats]);
-
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View>
+        <Text>{JSON.stringify(error)}</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
       <FlatList
-        data={chats}
+        data={data.conversations}
         renderItem={({item, index}) => (
           <ChatItem {...item} navigate={navigation.navigate} index={index} />
         )}

@@ -3,14 +3,7 @@ import {View, Text, Animated, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from './';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const ChatItem = ({
-  userId,
-  index,
-  title,
-  description,
-  user,
-  navigate,
-}) => {
+export const ChatItem = ({id, index, title, description, user, navigate}) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -39,7 +32,7 @@ export const ChatItem = ({
       }}>
       <TouchableOpacity
         style={styles.chatItem}
-        onPress={() => navigate('ChatViewScreen', {title, userId})}>
+        onPress={() => navigate('ChatViewScreen', {title, id})}>
         <Avatar src={user.avatarUrl} />
         <View style={styles.content}>
           <Text style={styles.title}>{title}</Text>

@@ -1,9 +1,10 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-
+import {MY_USER} from '../screens/ChatViewScreen';
 export const Message = ({message, userId}) => {
-  const incoming = userId !== 1;
+  console.log(userId);
+  const incoming = userId !== MY_USER;
   return (
     <Animatable.View
       duration={200}

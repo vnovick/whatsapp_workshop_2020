@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {View, TextInput, StyleSheet, Button, Keyboard} from 'react-native';
-
+import {MY_USER} from '../services/apolloClient';
 export const Compose = ({submit}) => {
   const [text, setText] = useState('');
   const submitMessage = () => {

@@ -1,27 +1,73 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   FlatList,
   StyleSheet,
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
+  View,
+  Text,
 } from 'react-native';
 import {Message, Compose} from '../components';
 import ApplicationStyles from '../styles/appstyles';
-import {getMessagesById, postMessage} from '../services/api';
 import {HeaderHeightContext} from '@react-navigation/stack';
+import {useSubscription, gql, useMutation} from '@apollo/client';
+
+export const MY_USER = '563dd0b2-68d6-46bc-9009-21b448bb7fdb';
+
+const GET_MESSAGES_BY_ID = gql`
+  subscription getMessagesById($conversationId: uuid) {
+    messages(where: {conversation_id: {_eq: $conversationId}}) {
+      id
+      message
+      userId: user_id
+    }
+  }
+`;
+
+const POST_MESSAGE = gql`
+  mutation postMessageForUserId(
+    $userId: uuid
+    $conversationId: uuid
+    $message: String!
+  ) {
+    insert_messages(
+      objects: {
+        user_id: $userId
+        conversation_id: $conversationId
+        message: $message
+      }
+    ) {
+      returning {
+        message
+      }
+    }
+  }
+`;
 
 export const ChatViewScreen = ({route}) => {
-  const {userId} = route.params;
-  const [messages, setMessages] = useState([]);
+  const {id: conversationId} = route.params;
+  const {loading, data, error} = useSubscription(GET_MESSAGES_BY_ID, {
+    variables: {conversationId},
+  });
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      const result = await getMessagesById(userId);
-      setMessages(result);
-    };
-    fetchMessages();
-  }, [userId, messages]);
+  const [postMessage, {data: mutationData}] = useMutation(POST_MESSAGE);
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View>
+        <Text>{JSON.stringify(error)}</Text>
+      </View>
+    );
+  }
+
   return (
     <ImageBackground
       source={require('../assets/imgs/background.png')}
@@ -34,13 +80,23 @@ export const ChatViewScreen = ({route}) => {
             keyboardVerticalOffset={headerHeight}>
             <FlatList
               style={styles.container}
-              data={messages}
+              data={data.messages}
               renderItem={({item, index}) => (
                 <Message key={item.id} {...item} />
               )}
               keyExtractor={(item, index) => `message-${index}`}
             />
-            <Compose submit={postMessage} />
+            <Compose
+              submit={(message) =>
+                postMessage({
+                  variables: {
+                    userId: MY_USER,
+                    conversationId,
+                    message,
+                  },
+                })
+              }
+            />
           </KeyboardAvoidingView>
         )}
       </HeaderHeightContext.Consumer>
