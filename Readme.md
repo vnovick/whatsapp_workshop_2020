@@ -105,6 +105,8 @@ Add `sdk.dir=/Users/username/Library/Android/sdk` under it making sure you subst
 
 Slides for the whole workshop can be found [here](https://slides.com/vladimirnovick/build-whatsapp-in-a-day-rn), but please make sure to follow along instead of jumping forward. If you've completed the step and wanna get bonus exercises, just ask.
 
+When cloning and installing the repo make sure to run `npx pod-install ios` so iOS will build or you can run `pod install` from ios folder
+
 <details>
     <summary>Exercise 1 - Components structure</summary>
 
