@@ -363,8 +363,7 @@ export const postMessage = (message) =>
 
 </details>
 
-In the end we should have basic functionality of posting and viewing messages. Now it's time to remove screen navigating components and create proper navigation layout. If you are not able to complete this step on time, make sure before next step to check out `step4` branch, run `npm install` and `npx pod-install ios` if you are using iOS.
-Make sure to restart metro bundler and rebuild the app
+After this exercise we should have basic functionality of posting and viewing messages so in this exercise we will simulate API calls to get messages and conversations, focus on getting user text input and learn how to deal with software keyboard
 
 <details>
 <summary>
@@ -376,6 +375,11 @@ Install React-navigation by following https://reactnavigation.org/docs/getting-s
 In a nutshell it's the following steps:
 `npm install --save @react-navigation/native`
 `npm install --save react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view`
+
+Install stack navigator: `npm install --save @react-navigation/stack`
+
+If You are on Mac install pods as well:
+`npx pod-install ios`
 
 - Remove Navigation buttons from the bottom of the screen
 - Create Navigation from `ConversationScreen` to `ChatViewScreen` passing title of the conversation as a param.
