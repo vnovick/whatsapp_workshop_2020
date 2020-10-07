@@ -385,6 +385,20 @@ If You are on Mac install pods as well:
 - Create Navigation from `ConversationScreen` to `ChatViewScreen` passing title of the conversation as a param.
 - Display conversation title in the header on `ChatViewScreen` and load relevant messages for conversation based on id (it will matter for later stage exercises. Right now messages will be the same)
 - Add left button on the left on `ChatViewScreen` with chevron left and `goBack` navigation
+- Adjust keyboard offset on `ChatViewScreen` using the following technique:
+
+```javascript
+import {HeaderHeightContext} from '@react-navigation/stack';
+
+<HeaderHeightContext.Consumer>
+  {({headerHeight}) => (
+    <KeyboardAvoidingView
+            style={styles.container}
+            behavior={Platform.OS === 'ios' ? 'padding' : null}
+            keyboardVerticalOffset={headerHeight}>
+  )}
+</HeaderHeightContext.Consumer>
+```
 
 </details>
 
