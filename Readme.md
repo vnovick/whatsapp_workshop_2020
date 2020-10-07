@@ -414,6 +414,10 @@ Animations using `Animated` API and `react-native-animatable`
 
 https://www.youtube.com/watch?v=OmZfMNsvBQA
 
+For Messages, use `react-native-animatable` and for Chat Items use `Animated` API.
+
+Bonus: On `ConversationScreen`, make messages appear one after another with `100ms` delay. Hint: You can use `Animated.delay` and `Animated.sequence` for that
+
 </details>
 
 After this exercise you suppose to have you screen with animations as shown in the video. If you are not able to complete this exercise on time, then you can check out `step 6` branch in the repo, follow with `npm install`, `npx pod-install ios` and rebuild your project and restart. Make sure to stop the metro bundler beforehand.
@@ -426,33 +430,33 @@ Exercise 7 - GraphQL
 Install Apollo GraphQL client by following this document:
 https://www.apollographql.com/docs/react/get-started/
 
-Configure your client for real-time capabilities like so:
+- `npm install --save @apollo/client graphql subscriptions-transport-ws`
+- create `src/services/apolloClient.js` like so:
 
 ```javascript
-import {ApolloClient} from 'apollo-client';
-import {InMemoryCache} from 'apollo-cache-inmemory';
-import {HttpLink} from 'apollo-link-http';
-import {split} from 'apollo-link';
-import {WebSocketLink} from 'apollo-link-ws';
-import {getMainDefinition} from 'apollo-utilities';
+import {ApolloClient, InMemoryCache, split, HttpLink} from '@apollo/client';
+import {getMainDefinition} from '@apollo/client/utilities';
+import {WebSocketLink} from '@apollo/client/link/ws';
 
 // Create an http link:
 const httpLink = new HttpLink({
-  uri: 'endpoint url',
+  uri: 'https://whatsapp-workshop-2020.herokuapp.com/v1/graphql',
 });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
-  uri: `ws://endpoint url`,
+  uri: `wss://whatsapp-workshop-2020.herokuapp.com/v1/graphql`,
   options: {
     reconnect: true,
   },
 });
 
-// using the ability to split links, you can send data to each link
-// depending on what kind of operation is being sent
-const link = split(
-  // split based on operation type
+// The split function takes three parameters:
+//
+// * A function that's called for each operation to execute
+// * The Link to use for an operation if the function returns a "truthy" value
+// * The Link to use for an operation if the function returns a "falsy" value
+const splitLink = split(
   ({query}) => {
     const definition = getMainDefinition(query);
     return (
@@ -468,13 +472,53 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   // Provide required constructor fields
   cache: cache,
-  link: link,
+  link: splitLink,
 });
+
+export default client;
 ```
+
+Now you need to wrap our main `App` with `ApolloProvider` like so:
+
+```javascript
+import {ApolloProvider} from '@apollo/client';
+import apolloClient from './src/services/apolloClient';
+
+<ApolloProvider client={apolloClient}>
+  <NavigationContainer>{Rest of the app}</NavigationContainer>
+</ApolloProvider>;
+```
+
+- Get rid of `api/services`
+
+to access and browse the API, use [https://graphiql-online.com](https://graphiql-online.com/) and put in `https://whatsapp-workshop-2020.herokuapp.com/v1/graphql`
 
 - Now instead of having API calls, use `useQuery` hook to get conversations from the endpoint created during the workshop.
 
+Use `Explorer` feature to find out what query you need to run and then use `useSubscription` hook to run it
+
+```javascript
+import {useSubscription, gql} from '@apollo/client';
+
+const GET_CONVERSATIONS = gql`
+  Your subscription
+`;
+
+//In the component
+const {loading, data, error} = useSubscription(GET_CONVERSATIONS);
+```
+
 - Use `useMutation` to post message to this endpoint. Finally use `useSubscription` to get real-time data.
-- Get rid of `api/services`
+
+```javascript
+import {useMutation, gql} from '@apollo/client';
+
+const POST_MESSAGE = gql`
+  your mutation
+`;
+
+//In the component
+const [postMessage, {data, loading, error}] = useMutation(POST_MESSAGE);
+```
 
 </details>
