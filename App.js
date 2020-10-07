@@ -7,46 +7,47 @@
  */
 
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  Platform,
-  Button,
-  StatusBar,
-  StyleSheet,
-} from 'react-native';
+import {SafeAreaView, Button, StatusBar, StyleSheet} from 'react-native';
 import {ConversationsScreen, ChatViewScreen} from './src/screens';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+const Stack = createStackNavigator();
 
 const App: () => React$Node = () => {
-  const [isConversations, setIsConversations] = useState(true);
-  const currentScreen = isConversations ? (
-    <ConversationsScreen />
-  ) : (
-    <ChatViewScreen />
-  );
   return (
-    <>
+    <NavigationContainer>
       <StatusBar backgroundColor="#FFF" barStyle="dark-content" />
-      <SafeAreaView style={styles.container}>
-        {currentScreen}
-        <Button
-          title={
-            isConversations
-              ? 'Go to ChatViewScreen'
-              : 'Go to Conversations Screen'
-          }
-          onPress={() => setIsConversations(!isConversations)}
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#006655',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}>
+        <Stack.Screen name="Conversations" component={ConversationsScreen} />
+        <Stack.Screen
+          name="ChatViewScreen"
+          component={ChatViewScreen}
+          options={({route, navigation}) => ({
+            title: route.params?.title,
+            headerLeft: () => (
+              <Icon
+                name="chevron-left"
+                size={40}
+                color="#ffffff"
+                onPress={() => navigation.goBack()}
+              />
+            ),
+          })}
         />
-      </SafeAreaView>
-    </>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default App;

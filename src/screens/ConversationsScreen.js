@@ -4,7 +4,7 @@ import {ChatItem} from '../components';
 import ApplicationStyles from '../styles/appstyles';
 import {getChats} from '../services/api';
 
-export const ConversationsScreen = () => {
+export const ConversationsScreen = ({navigation}) => {
   const [chats, setChats] = useState([]);
   const fetchChats = async () => {
     const result = await getChats();
@@ -19,7 +19,9 @@ export const ConversationsScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={chats}
-        renderItem={({item}) => <ChatItem {...item} />}
+        renderItem={({item}) => (
+          <ChatItem {...item} navigate={navigation.navigate} />
+        )}
         keyExtractor={(item) => `message-${item.id}`}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />

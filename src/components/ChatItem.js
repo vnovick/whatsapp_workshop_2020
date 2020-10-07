@@ -1,10 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from './';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const ChatItem = ({title, description, user}) => (
-  <View style={styles.chatItem}>
+export const ChatItem = ({id, title, description, user, navigate}) => (
+  <TouchableOpacity
+    style={styles.chatItem}
+    onPress={() => navigate('ChatViewScreen', {title, id})}>
     <Avatar src={user.avatarUrl} />
     <View style={styles.content}>
       <Text style={styles.title}>{title}</Text>
@@ -14,7 +16,7 @@ export const ChatItem = ({title, description, user}) => (
       <Text style={styles.label}>Yesterday</Text>
       <Icon style={styles.arrow} name="chevron-right" size={20} />
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({

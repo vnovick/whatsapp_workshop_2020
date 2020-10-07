@@ -376,6 +376,11 @@ In a nutshell it's the following steps:
 `npm install --save @react-navigation/native`
 `npm install --save react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view`
 
+Install stack navigator: `npm install --save @react-navigation/stack`
+
+If You are on Mac install pods as well:
+`npx pod-install ios`
+
 - Remove Navigation buttons from the bottom of the screen
 - Create Navigation from `ConversationScreen` to `ChatViewScreen` passing title of the conversation as a param.
 - Display conversation title in the header on `ChatViewScreen` and load relevant messages for conversation based on id (it will matter for later stage exercises. Right now messages will be the same)
