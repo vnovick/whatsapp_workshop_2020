@@ -3,10 +3,10 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from './';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const ChatItem = ({id, title, description, user, navigate}) => (
+export const ChatItem = ({userId, title, description, user, navigate}) => (
   <TouchableOpacity
     style={styles.chatItem}
-    onPress={() => navigate('ChatViewScreen', {title, id})}>
+    onPress={() => navigate('ChatViewScreen', {title, userId})}>
     <Avatar src={user.avatarUrl} />
     <View style={styles.content}>
       <Text style={styles.title}>{title}</Text>

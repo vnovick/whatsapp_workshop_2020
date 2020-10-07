@@ -11,16 +11,16 @@ import ApplicationStyles from '../styles/appstyles';
 import {getMessagesById, postMessage} from '../services/api';
 
 export const ChatViewScreen = ({route}) => {
-  const {id} = route.params;
+  const {userId} = route.params;
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const result = await getMessagesById(id);
+      const result = await getMessagesById(userId);
       setMessages(result);
     };
     fetchMessages();
-  }, [id, messages]);
+  }, [userId, messages]);
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0;
 
   return (
