@@ -1,14 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {Avatar} from './';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export const ChatItem = ({title, description}) => (
+export const ChatItem = ({title, description, user}) => (
   <View style={styles.chatItem}>
+    <Avatar src={user.avatarUrl} />
     <View style={styles.content}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.label}>{description}</Text>
     </View>
     <View style={styles.navLabel}>
       <Text style={styles.label}>Yesterday</Text>
+      <Icon style={styles.arrow} name="chevron-right" size={20} />
     </View>
   </View>
 );

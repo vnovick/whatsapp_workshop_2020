@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, ImageBackground} from 'react-native';
 import {Message, Compose} from '../components';
 import ApplicationStyles from '../styles/appstyles';
 const messages = [
@@ -16,12 +16,17 @@ const messages = [
 ];
 
 export const ChatViewScreen = () => (
-  <View style={styles.container}>
-    {messages.map((message) => (
-      <Message key={message.id} {...message} />
-    ))}
+  <ImageBackground
+    source={require('../assets/imgs/background.png')}
+    style={styles.container}>
+    <FlatList
+      style={styles.container}
+      data={messages}
+      renderItem={({item}) => <Message key={item.id} {...item} />}
+      keyExtractor={(item, index) => `message-${index}`}
+    />
     <Compose />
-  </View>
+  </ImageBackground>
 );
 
 const styles = StyleSheet.create({
